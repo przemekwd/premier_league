@@ -31,7 +31,7 @@ class NationRepository extends ServiceEntityRepository
      */
     public function findAllSort(string $sort = 'ASC'): array
     {
-        return $this->findAllSort($sort)
+        return $this->findAllSortSelect($sort)
             ->getQuery()
             ->getResult();
     }
