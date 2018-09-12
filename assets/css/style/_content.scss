@@ -1,0 +1,20 @@
+.page-content {
+  margin: 1em;
+}
+.btn {
+  i {
+    vertical-align: bottom;
+    &.material-icons {
+      width: 24px;
+    }
+  }
+}
+.btn-action {
+  position: absolute;
+  color: $navbar-link-color;
+  bottom: 10px;
+  right: 10px;
+  &:hover {
+    color: $navbar-color;
+  }
+}

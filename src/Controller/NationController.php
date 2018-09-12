@@ -23,7 +23,7 @@ class NationController extends AbstractController
      */
     public function index(NationRepository $nationRepository): Response
     {
-        return $this->render('nation/index.html.twig', ['nations' => $nationRepository->findAllSort()]);
+        return $this->render('nation/index.html.twig', ['nations' => $nationRepository->findAllSort(['name' => 'ASC'])]);
     }
 
     /**

@@ -1,0 +1,43 @@
+.nation-block {
+  padding: 1.5rem;
+  margin: 1rem;
+  border: 1px solid #ddd;
+  .nation-name {
+    position: relative;
+    top: -1rem;
+    left: -.5rem;
+    font-size: .75rem;
+    margin-bottom: .5rem;
+  }
+  .nation-image {
+    text-align: center;
+    position: relative;
+    transition-delay: 1s;
+    img {
+      @include size-img(100%, 100%);
+    }
+    .btn-action {
+      display: none;
+    }
+    &:hover {
+      img {
+        filter: grayscale(1);
+      }
+      .btn-action {
+        display: block;
+      }
+    }
+  }
+  .nation-players {
+    display: block;
+    position: relative;
+    text-align: center;
+    font-size: .8rem;
+    margin-top: .5rem;
+  }
+}
+.nation-flag {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}

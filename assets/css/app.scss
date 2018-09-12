@@ -1,4 +1,10 @@
-@import "colors";
-@import "nav";
-@import "content";
-@import "nation";
+/** CONST */
+@import "const/color";
+/** MIXINS */
+@import "mixin/size";
+/** STYLES */
+@import "style/nav";
+@import "style/content";
+@import "style/table";
+@import "style/nation";
+@import "style/player";

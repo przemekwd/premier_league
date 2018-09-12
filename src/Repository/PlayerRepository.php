@@ -19,6 +19,22 @@ class PlayerRepository extends ServiceEntityRepository
         parent::__construct($registry, Player::class);
     }
 
+    /**
+     * @param array $orderBy
+     * @return Player[]
+     */
+    public function findAllSort(array $orderBy = []): array
+    {
+        $result = $this->createQueryBuilder('p');
+
+        foreach ($orderBy as $sort => $order) {
+            $result->addOrderBy("p.$sort", $order);
+        }
+
+        return $result->getQuery()->getResult();
+    }
+
+
 //    /**
 //     * @return Player[] Returns an array of Player objects
 //     */

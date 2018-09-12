@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    player_image_dir: '%kernel.project_dir%/public/img/player'
+    temp_dir: '%kernel.project_dir%/public/temp'
 
 services:
     # default configuration for services in *this* file
@@ -38,3 +40,18 @@ services:
         arguments: ["@request_stack"]
         tags:
             - { name: knp_menu.menu, alias: main }
+
+    App\Repository\CrudRepository:
+        arguments:
+
+
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%temp_dir%'
+
+    App\EventListener\PlayerImageUploadListener:
+        arguments:
+            $targetDirectory: '%player_image_dir%'
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }

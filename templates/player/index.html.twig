@@ -3,18 +3,19 @@
 {% block title %}Player index{% endblock %}
 
 {% block body %}
-    <h1>Player index</h1>
+    <h1 class="table-header">
+        <i class="material-icons">view_list</i>
+        {% trans from 'player'%}player_index{% endtrans %}
+    </h1>
 
-    <table class="table">
+    <table class="table table-hover table-dark">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th class="table-first-col"></th>
+                <th class="table-first-col"></th>
                 <th>Name</th>
                 <th>BirthDate</th>
                 <th>BirthPlace</th>
-                <th>Image</th>
                 <th>NationActive</th>
                 <th>ClubActive</th>
                 <th>actions</th>
@@ -23,18 +24,26 @@
         <tbody>
         {% for player in players %}
             <tr>
-                <td>{{ player.id }}</td>
-                <td>{{ player.firstname }}</td>
-                <td>{{ player.lastname }}</td>
-                <td>{{ player.name }}</td>
-                <td>{{ player.birthDate ? player.birthDate|date('Y-m-d') : '' }}</td>
+                <td class="table-first-col">
+                    <img class="player-avatar small" src="/img/player/{{ player.image }}" alt="{{ player.firstname }} {{ player.lastname }}"/>
+                </td>
+                <td class="table-first-col">
+                    <img src="/img/nation/{{ player.nation.code }}.png" alt="{{ player.nation.name }}" class="nation-flag">
+                </td>
+                <td>{{ player.firstname }} {% if player.name %}"{{ player.name }}"{% endif %} {{ player.lastname }}</td>
+                <td>{{ player.birthDate ? player.birthDate|date('d-m-Y') : '' }}</td>
                 <td>{{ player.birthPlace }}</td>
-                <td>{{ player.image }}</td>
                 <td>{{ player.nationActive ? 'Yes' : 'No' }}</td>
                 <td>{{ player.clubActive ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('player_show', {'id': player.id}) }}">show</a>
-                    <a href="{{ path('player_edit', {'id': player.id}) }}">edit</a>
+                    <a href="{{ path('player_show', {'id': player.id}) }}" class="btn btn-secondary">
+                        <i class="material-icons">info_outlined</i>
+                        {% trans from 'button'%}show{% endtrans %}
+                    </a>
+                    <a href="{{ path('player_edit', {'id': player.id}) }}" class="btn btn-secondary">
+                        <i class="material-icons">edit</i>
+                        {% trans from 'button'%}edit{% endtrans %}
+                    </a>
                 </td>
             </tr>
         {% else %}
@@ -45,5 +54,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('player_new') }}">Create new</a>
+    <a href="{{ path('player_new') }}" class="btn btn-primary">
+        <i class="material-icons">add_circle_outline</i>
+        {% trans from 'button'%}add{% endtrans %}
+    </a>
 {% endblock %}

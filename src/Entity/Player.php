@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PlayerRepository")
@@ -43,6 +44,9 @@ class Player
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank(message="Please, upload player image")
+     * @Assert\File(mimeTypes={"image/png"})
      */
     private $image;
 
@@ -137,12 +141,12 @@ class Player
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage($image): self
     {
         $this->image = $image;
 

@@ -19,6 +19,10 @@ class NationRepository extends ServiceEntityRepository
         parent::__construct($registry, Nation::class);
     }
 
+    /**
+     * @param string $sort
+     * @return \Doctrine\ORM\QueryBuilder
+     */
     public function findAllSortSelect($sort = 'ASC')
     {
         return $this->createQueryBuilder('n')
@@ -26,14 +30,18 @@ class NationRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $sort
+     * @param array $orderBy
      * @return Nation[]
      */
-    public function findAllSort(string $sort = 'ASC'): array
+    public function findAllSort(array $orderBy = []): array
     {
-        return $this->findAllSortSelect($sort)
-            ->getQuery()
-            ->getResult();
+        $result = $this->createQueryBuilder('n');
+
+        foreach ($orderBy as $sort => $order) {
+            $result->addOrderBy("n.$sort", $order);
+        }
+
+        return $result->getQuery()->getResult();
     }
 
 //    /**

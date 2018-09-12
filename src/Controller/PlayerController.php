@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Player;
 use App\Form\PlayerType;
 use App\Repository\PlayerRepository;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,22 +23,29 @@ class PlayerController extends AbstractController
      */
     public function index(PlayerRepository $playerRepository): Response
     {
-        return $this->render('player/index.html.twig', ['players' => $playerRepository->findAll()]);
+        return $this->render('player/index.html.twig', [
+            'players' => $playerRepository->findAllSort([
+                'lastname' => 'ASC',
+                'firstname' => 'ASC',
+            ]),
+        ]);
     }
 
     /**
      * @Route("/new", name="player_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, FileUploader $fileUploader): Response
     {
         $player = new Player();
         $form = $this->createForm(PlayerType::class, $player);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $player->getImage();
+            $fileName = $fileUploader->upload($file);
+            $player->setImage($fileName);
+
             $em = $this->getDoctrine()->getManager();
-            $file = $form['image']->getData();
-            $file->move('/img/player/', 'image');
             $em->persist($player);
             $em->flush();
 
@@ -62,6 +71,9 @@ class PlayerController extends AbstractController
      */
     public function edit(Request $request, Player $player): Response
     {
+        $player->setImage(
+            new File($this->getParameter('player_image_dir') . '/' . $player->getImage())
+        );
         $form = $this->createForm(PlayerType::class, $player);
         $form->handleRequest($request);
 
