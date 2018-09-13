@@ -1,0 +1,33 @@
+.nation-block {
+  padding: 1.5rem;
+  margin: 1rem;
+  border: 1px solid #ddd;
+  .nation-name {
+    position: relative;
+    top: -1rem;
+    left: -.5rem;
+    font-size: .75rem;
+    margin-bottom: .5rem;
+  }
+  .nation-image {
+    text-align: center;
+    @include size(100%, 50px);
+    @include background('center', '', 100%, 80px);
+    margin: 1rem 0;
+  }
+  .nation-actions {
+    width: 100%;
+    text-align: center;
+  }
+  .nation-players {
+    display: block;
+    position: relative;
+    text-align: center;
+    font-size: .8rem;
+    margin-top: .5rem;
+  }
+}
+.nation-flag {
+  @include size(35px);
+  border-radius: 50%;
+}
