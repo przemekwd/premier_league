@@ -1,6 +1,6 @@
 img.player-avatar {
-  @include size-img(100px, 100px);
+  @include size(100px, 100px);
   &.small {
-    @include size-img(50px, 50px);
+    @include size(50px, 50px);
   }
 }

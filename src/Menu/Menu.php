@@ -19,9 +19,14 @@ class Menu
      */
     private $factory;
 
+    private $childAttribute;
+
     public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
+        $this->childAttribute = [
+            'class' => 'nav-item'
+        ];
     }
 
     /**
@@ -30,9 +35,6 @@ class Menu
      */
     public function createMain(RequestStack $requestStack): ItemInterface
     {
-        $childAttribute = [
-            'class' => 'nav-item'
-        ];
         $menu = $this->factory->createItem('root', [
             'childrenAttributes' => ['class' => 'navbar-nav']
         ]);
@@ -44,15 +46,26 @@ class Menu
         ]);
         $menu->addChild('Nations', [
             'route' => 'nation_index',
-            'attributes' => $childAttribute
+            'attributes' => $this->childAttribute
         ]);
         $menu->addChild('Players', [
             'route' => 'player_index',
-            'attributes' => $childAttribute
+            'attributes' => $this->childAttribute
         ]);
-        $menu['Nations']->setLinkAttribute('class', 'nav-link');
-        $menu['Players']->setLinkAttribute('class', 'nav-link');
+        $this->setLinkClassToChild($menu);
 
         return $menu;
+    }
+
+    /**
+     * @param ItemInterface $menu
+     */
+    private function setLinkClassToChild(ItemInterface &$menu)
+    {
+        foreach ($menu as $name => $child) {
+            if (!in_array($name, ['Home'])) {
+                $child->setLinkAttribute('class', 'nav-link');
+            }
+        }
     }
 }

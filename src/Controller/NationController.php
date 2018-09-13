@@ -18,19 +18,23 @@ class NationController extends AbstractController
     /**
      * @Route("/", name="nation_index", methods="GET")
      *
-     * @param NationRepository $nationRepository
-     * @return Response
+     * @param   NationRepository $nationRepository
+     * @return  Response
      */
     public function index(NationRepository $nationRepository): Response
     {
-        return $this->render('nation/index.html.twig', ['nations' => $nationRepository->findAllSort(['name' => 'ASC'])]);
+        return $this->render('nation/index.html.twig', [
+            'nations' => $nationRepository->findAllBySort([], [
+                'name' => 'ASC'
+            ])
+        ]);
     }
 
     /**
      * @Route("/new", name="nation_new", methods="GET|POST")
      *
-     * @param Request $request
-     * @return Response
+     * @param   Request     $request
+     * @return  Response
      */
     public function new(Request $request): Response
     {
@@ -55,8 +59,8 @@ class NationController extends AbstractController
     /**
      * @Route("/{id}", name="nation_show", methods="GET")
      *
-     * @param Nation $nation
-     * @return Response
+     * @param   Nation      $nation
+     * @return  Response
      */
     public function show(Nation $nation): Response
     {
@@ -66,9 +70,9 @@ class NationController extends AbstractController
     /**
      * @Route("/{id}/edit", name="nation_edit", methods="GET|POST")
      *
-     * @param Request $request
-     * @param Nation $nation
-     * @return Response
+     * @param   Request     $request
+     * @param   Nation      $nation
+     * @return  Response
      */
     public function edit(Request $request, Nation $nation): Response
     {
@@ -90,9 +94,9 @@ class NationController extends AbstractController
     /**
      * @Route("/{id}", name="nation_delete", methods="DELETE")
      *
-     * @param Request $request
-     * @param Nation $nation
-     * @return Response
+     * @param   Request     $request
+     * @param   Nation      $nation
+     * @return  Response
      */
     public function delete(Request $request, Nation $nation): Response
     {

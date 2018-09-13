@@ -1,13 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Nation{% endblock %}
+{% block title %}
+    {% trans from 'base' %}title{% endtrans %} | {% trans from 'nation' %}nation_menu{% endtrans %} |
+    {% trans with {'%nation%': nation.name} %}nation_edit{% endtrans %}
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Nation</h1>
+    <h1 class="table-header">
+        {{ icon('edit') }}
+        <span>{% trans with {'%nation%': nation.name} %}nation_edit{% endtrans %}</span>
+    </h1>
 
-    {{ include('nation/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('nation/form/edit.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('nation_index') }}">back to list</a>
+    <a href="{{ path('nation_index') }}" class="btn btn-warning btn-return">
+        {{ icon('arrow_back_ios') }} {% trans from 'nation' %}nation_index{% endtrans %}
+    </a>
 
-    {{ include('nation/_delete_form.html.twig') }}
+    {{ include('nation/form/delete.html.twig') }}
 {% endblock %}

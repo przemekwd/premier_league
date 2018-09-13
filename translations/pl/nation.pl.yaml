@@ -1,2 +1,7 @@
+nation_menu: Narodowości
 nation_index: Lista narodowości
-players_count: Piłkarzy
+nation_new: Dodaj nową narodowość
+nation_edit: 'Edycja %nation'
+players_count: Liczba zawodników
+name: Nazwa
+code: Kod

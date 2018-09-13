@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Nation{% endblock %}
+{% block title %}
+    {% trans from 'base' %}title{% endtrans %} | {% trans from 'nation' %}nation_new{% endtrans %}
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Nation</h1>
+    <h1 class="table-header">
+        {{ icon('add') }} {% trans from 'nation' %}nation_new{% endtrans %}
+    </h1>
 
-    {{ include('nation/_form.html.twig') }}
+    {{ include('nation/form/edit.html.twig') }}
 
-    <a href="{{ path('nation_index') }}">back to list</a>
+    <a href="{{ path('nation_index') }}" class="btn btn-warning btn-return">
+        {{ icon('arrow_back_ios') }} {% trans from 'nation' %}nation_index{% endtrans %}
+    </a>
 {% endblock %}

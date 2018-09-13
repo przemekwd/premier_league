@@ -12,20 +12,28 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Player[]    findAll()
  * @method Player[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PlayerRepository extends ServiceEntityRepository
+class PlayerRepository extends ServiceEntityRepository implements AppRepositoryInterface
 {
+    /**
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Player::class);
     }
 
     /**
-     * @param array $orderBy
-     * @return Player[]
+     * @param   array       $where
+     * @param   array       $orderBy
+     * @return  Player[]
      */
-    public function findAllSort(array $orderBy = []): array
+    public function findAllBySort(array $where = [], array $orderBy = []): array
     {
         $result = $this->createQueryBuilder('p');
+
+        foreach ($where as $field => $is) {
+            $result->andWhere("p.$field = $is");
+        }
 
         foreach ($orderBy as $sort => $order) {
             $result->addOrderBy("p.$sort", $order);
@@ -34,33 +42,4 @@ class PlayerRepository extends ServiceEntityRepository
         return $result->getQuery()->getResult();
     }
 
-
-//    /**
-//     * @return Player[] Returns an array of Player objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Player
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

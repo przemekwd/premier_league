@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Player index{% endblock %}
+{% block title %}
+    {% trans from 'base' %}title{% endtrans %} | {% trans from 'player' %}player_index{% endtrans %}
+{% endblock %}
 
 {% block body %}
     <h1 class="table-header">
@@ -25,10 +27,12 @@
         {% for player in players %}
             <tr>
                 <td class="table-first-col">
-                    <img class="player-avatar small" src="/img/player/{{ player.image }}" alt="{{ player.firstname }} {{ player.lastname }}"/>
+                    <img class="player-avatar small" src="{{ asset('/img/player/' ~ player.image) }}"
+                         alt="{{ player.firstname }} {{ player.lastname }}"/>
                 </td>
                 <td class="table-first-col">
-                    <img src="/img/nation/{{ player.nation.code }}.png" alt="{{ player.nation.name }}" class="nation-flag">
+                    <img src="{{ asset('/build/img/nation/' ~ player.nation.code ~ '.png') }}"
+                         alt="{{ player.nation.name }}" class="nation-flag">
                 </td>
                 <td>{{ player.firstname }} {% if player.name %}"{{ player.name }}"{% endif %} {{ player.lastname }}</td>
                 <td>{{ player.birthDate ? player.birthDate|date('d-m-Y') : '' }}</td>
@@ -48,7 +52,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

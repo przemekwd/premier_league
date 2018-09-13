@@ -41,9 +41,9 @@ services:
         tags:
             - { name: knp_menu.menu, alias: main }
 
-    App\Repository\CrudRepository:
-        arguments:
-
+    App\Twig\AppFunction:
+        tags:
+            - { name: twig.extension }
 
     App\Service\FileUploader:
         arguments:

@@ -1,5 +1,5 @@
 .page-content {
-  margin: 1em;
+  margin: $margin-page;
 }
 .btn {
   i {
@@ -7,14 +7,18 @@
     &.material-icons {
       width: 24px;
     }
+    &.icon-warning, &.icon-danger {
+      color: #fff;
+    }
+  }
+  .btn-return {
+    float: left;
+    display: inline;
   }
 }
-.btn-action {
-  position: absolute;
-  color: $navbar-link-color;
-  bottom: 10px;
-  right: 10px;
-  &:hover {
-    color: $navbar-color;
+form {
+  &.delete-form {
+    display: inline;
+    float: right;
   }
 }

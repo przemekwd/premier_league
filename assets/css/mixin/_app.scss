@@ -1,0 +1,31 @@
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+@mixin background($style, $img: '', $sizeWidth: 100px, $sizeHeight: 100px) {
+  @if ($img != '') {
+    background-image: $img;
+  }
+  @if ($style == 'cover') {
+    background-position: 100% 100%;
+    background-size: cover;
+  } @else if ($style == 'size') {
+    background-position: center;
+    background-size: $sizeWidth $sizeHeight;
+  }
+}
+@mixin transition($prop, $time) {
+  -webkit-transition: $prop $time;
+  -moz-transition: $prop $time;
+  -ms-transition: $prop $time;
+  -o-transition: $prop $time;
+  transition: $prop $time;
+}
+@mixin border($type: 'all', $borderSize: 1px, $borderType: solid, $borderColor: $color-border-default, $borderRadius: 0) {
+  @if ($type == 'all') {
+    border: $borderSize $borderType $borderColor;
+  } @else {
+    #{'border-', $type}: $borderSize $borderType $borderColor;
+  }
+  border-radius: $borderRadius;
+}

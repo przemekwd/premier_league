@@ -1,3 +1,5 @@
-add: 'Dodaj'
-edit: 'Zmień'
-show: 'Szczegóły'
+add: Dodaj
+edit: Zmień
+show: Szczegóły
+save: Zapisz
+delete: Usuń

@@ -1,2 +1,7 @@
+nation_menu: Nations
 nation_index: Nations list
+nation_new: Add new nation
+nation_edit: 'Edit %nation'
 players_count: Players
+name: Name
+code: Code

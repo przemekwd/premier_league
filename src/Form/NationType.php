@@ -12,8 +12,12 @@ class NationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('code')
+            ->add('name', null, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('code', null, [
+                'attr' => ['class' => 'form-control']
+            ])
         ;
     }
 
@@ -21,6 +25,7 @@ class NationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Nation::class,
+            'attr' => ['class' => 'form-app']
         ]);
     }
 }

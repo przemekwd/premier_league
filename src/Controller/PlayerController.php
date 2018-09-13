@@ -21,13 +21,13 @@ class PlayerController extends AbstractController
     /**
      * @Route("/", name="player_index", methods="GET")
      */
-    public function index(PlayerRepository $playerRepository): Response
+    public function index(PlayerRepository $playerRepository, Request $request): Response
     {
         return $this->render('player/index.html.twig', [
-            'players' => $playerRepository->findAllSort([
-                'lastname' => 'ASC',
-                'firstname' => 'ASC',
-            ]),
+            'players' => $playerRepository->findAllBySort(
+                $request->query->all(),
+                ['lastname' => 'ASC', 'firstname' => 'ASC',]
+            )
         ]);
     }
 

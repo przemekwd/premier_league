@@ -1,10 +1,13 @@
 /** CONST */
 @import "const/color";
-/** MIXINS */
-@import "mixin/size";
-/** STYLES */
+@import "const/margin";
+@import "const/image";
+/** MIXIN */
+@import "mixin/app";
+/** STYLE */
 @import "style/nav";
 @import "style/content";
 @import "style/table";
+@import "style/form";
 @import "style/nation";
 @import "style/player";

@@ -1,10 +1,16 @@
 h1.table-header {
-  margin: 1.5rem;
-  color: $header-color;
+  margin: $margin-h1;
+  color: $color-header;
   i {
     vertical-align: sub;
     font-size: 48px;
-    color: $header-color;
+    color: $color-header;
+  }
+  span {
+    vertical-align: text-top;
+  }
+  img {
+    vertical-align: baseline;
   }
 }
 table {
