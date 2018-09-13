@@ -5,7 +5,7 @@
   i {
     vertical-align: bottom;
     &.material-icons {
-      width: 24px;
+      width: $size-material-icon;
     }
     &.icon-warning, &.icon-danger {
       color: #fff;

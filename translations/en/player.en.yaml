@@ -1,1 +1,11 @@
+player_menu: Player
 player_index: Players list
+player_new: Add new player
+player_edit: 'Edit %fullname'
+firstname: Firstname
+lastname: Lastname
+name: Name
+birth_date: Birth date
+birth_place: Birth place
+nation_active: Nation active
+club_active: Club active

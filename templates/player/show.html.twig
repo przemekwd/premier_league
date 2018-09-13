@@ -3,52 +3,52 @@
 {% block title %}Player{% endblock %}
 
 {% block body %}
-    <h1>Player</h1>
+    <h1 class="table-header">
+        <img src="{{ asset('/build/img/nation/' ~ player.nation.code ~ '.png') }}" class="nation-flag"/>
+        <span>{{ player.fullname }}</span>
+    </h1>
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-lg-4 player-image">
+            <img src="{{ asset('/img/player/' ~ player.image) }}" alt="{{ player.fullname }}"/>
+        </div>
+        <div class="col-md-8 col-sm-8 col-ls-8">
+            <div class="row mb-3">
+                <div class="col-md-4 col-sm-4 col-ls-4 font-weight-bold">{% trans from 'player' %}firstname{% endtrans %}</div>
+                <div class="col-md-8 col-sm-8 col-ls-8">{{ player.firstname }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 col-sm-4 col-ls-4 font-weight-bold">{% trans from 'player' %}lastname{% endtrans %}</div>
+                <div class="col-md-8 col-sm-8 col-ls-8">{{ player.lastname }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 col-sm-4 col-ls-4 font-weight-bold">{% trans from 'player' %}name{% endtrans %}</div>
+                <div class="col-md-8 col-sm-8 col-ls-8">{{ player.name }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 col-sm-4 col-ls-4 font-weight-bold">{% trans from 'player' %}birth_date{% endtrans %}</div>
+                <div class="col-md-8 col-sm-8 col-ls-8">{{ player.birthDate ? player.birthDate|date('Y-m-d') : '' }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 col-sm-4 col-ls-4 font-weight-bold">{% trans from 'player' %}birth_place{% endtrans %}</div>
+                <div class="col-md-8 col-sm-8 col-ls-8">{{ player.birthPlace }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 col-sm-4 col-ls-4 font-weight-bold">{% trans from 'player' %}nation_active{% endtrans %}</div>
+                <div class="col-md-8 col-sm-8 col-ls-8">{{ player.nationActive ? icon('check_circle_outline') : icon('highlight_off') }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 col-sm-4 col-ls-4 font-weight-bold">{% trans from 'player' %}club_active{% endtrans %}</div>
+                <div class="col-md-8 col-sm-8 col-ls-8">{{ player.clubActive ? icon('check_circle_outline') : icon('highlight_off') }}</div>
+            </div>
+        </div>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ player.id }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ player.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ player.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ player.name }}</td>
-            </tr>
-            <tr>
-                <th>BirthDate</th>
-                <td>{{ player.birthDate ? player.birthDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>BirthPlace</th>
-                <td>{{ player.birthPlace }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ player.image }}</td>
-            </tr>
-            <tr>
-                <th>NationActive</th>
-                <td>{{ player.nationActive ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>ClubActive</th>
-                <td>{{ player.clubActive ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <a href="{{ path('player_index') }}" class="btn btn-secondary">
+        {{ icon('arrow_back_ios', 'icon-secondary') }} {% trans from 'player' %}player_index{% endtrans %}
+    </a>
+    <a href="{{ path('player_edit', {'id': player.id}) }}" class="btn btn-warning btn-return">
+        {{ icon('edit', 'icon-warning') }} {% trans from 'button' %}edit{% endtrans %}
+    </a>
 
-    <a href="{{ path('player_index') }}">back to list</a>
-
-    <a href="{{ path('player_edit', {'id': player.id}) }}">edit</a>
-
-    {{ include('player/_delete_form.html.twig') }}
+    {{ include('player/form/delete.html.twig') }}
 {% endblock %}

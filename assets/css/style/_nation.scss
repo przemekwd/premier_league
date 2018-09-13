@@ -1,18 +1,18 @@
 .nation-block {
-  padding: 1.5rem;
-  margin: 1rem;
-  border: 1px solid #ddd;
+  padding: $padding-default;
+  margin: $margin-page;
+  @include border('all', 1px, solid, $color-border-default, 0);
   .nation-name {
     position: relative;
     top: -1rem;
     left: -.5rem;
     font-size: .75rem;
-    margin-bottom: .5rem;
+    margin-bottom: $margin-page-half
   }
   .nation-image {
     text-align: center;
     @include size(100%, 50px);
-    @include background('center', '', 100%, 80px);
+    @include background('size', '', 100%, 100px);
     margin: 1rem 0;
   }
   .nation-actions {
@@ -24,7 +24,7 @@
     position: relative;
     text-align: center;
     font-size: .8rem;
-    margin-top: .5rem;
+    margin-top: $margin-page-half
   }
 }
 .nation-flag {

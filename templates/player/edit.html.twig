@@ -1,13 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Player{% endblock %}
+{% block title %}
+    {% trans from 'base' %}title{% endtrans %} | {% trans from 'player' %}player_menu{% endtrans %} |
+    {% trans with {'%fullname': player.fullname} from 'player' %}player_edit{% endtrans %}
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Player</h1>
+    <h1 class="table-header">
+        {{ icon('edit') }}
+        <span>{% trans with {'%fullname': player.fullname} from 'player' %}player_edit{% endtrans %}</span>
+    </h1>
 
-    {{ include('player/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('player/form/edit.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('player_index') }}">back to list</a>
+    <a href="{{ path('player_index') }}" class="btn btn-warning btn-return">
+        {{ icon('arrow_back_ios') }} {% trans from 'nation' %}nation_index{% endtrans %}
+    </a>
 
-    {{ include('player/_delete_form.html.twig') }}
+    {{ include('player/form/delete.html.twig') }}
 {% endblock %}

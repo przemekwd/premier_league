@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {% trans from 'nation' %}nation_title{% endtrans %}
+    {% trans from 'base' %}title{% endtrans %} | {% trans from 'nation' %}nation_index{% endtrans %}
 {% endblock %}
 
 {% block body %}
     <h1 class="table-header">
-        {{ icon('view_module') }} {% trans from 'nation'%}nation_index{% endtrans %}
+        {{ icon('view_module') }} {% trans from 'nation' %}nation_index{% endtrans %}
     </h1>
     <div class="row">
         {% for nation in nations %}
@@ -27,7 +27,7 @@
                 </a>
             </div>
         {% else %}
-            <div>no records found</div>
+            <div>{% trans from 'base' %}empty_list{% endtrans %}</div>
         {% endfor %}
     </div>
 

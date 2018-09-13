@@ -2,7 +2,10 @@ form {
   margin: $margin-table;
   .form-app {
     & > div {
-      margin-bottom: 1rem;
+      margin-bottom: $margin-page;
     }
+  }
+  input[type="checkbox"].form-control {
+    width: auto;
   }
 }

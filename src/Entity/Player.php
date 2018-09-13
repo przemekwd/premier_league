@@ -76,6 +76,8 @@ class Player
      */
     private $position;
 
+    private $fullname;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -211,5 +213,12 @@ class Player
         $this->position = $position;
 
         return $this;
+    }
+
+    public function getFullname()
+    {
+        return $this->firstname
+            . ($this->name ? ' "' . $this->name . '" ' : ' ')
+            . $this->lastname;
     }
 }

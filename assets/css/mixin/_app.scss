@@ -4,7 +4,7 @@
 }
 @mixin background($style, $img: '', $sizeWidth: 100px, $sizeHeight: 100px) {
   @if ($img != '') {
-    background-image: $img;
+    background-image: url($img);
   }
   @if ($style == 'cover') {
     background-position: 100% 100%;

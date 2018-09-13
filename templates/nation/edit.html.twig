@@ -2,13 +2,13 @@
 
 {% block title %}
     {% trans from 'base' %}title{% endtrans %} | {% trans from 'nation' %}nation_menu{% endtrans %} |
-    {% trans with {'%nation%': nation.name} %}nation_edit{% endtrans %}
+    {% trans with {'%nation': nation.name} from 'nation' %}nation_edit{% endtrans %}
 {% endblock %}
 
 {% block body %}
     <h1 class="table-header">
         {{ icon('edit') }}
-        <span>{% trans with {'%nation%': nation.name} %}nation_edit{% endtrans %}</span>
+        <span>{% trans with {'%nation': nation.name} from 'nation' %}nation_edit{% endtrans %}</span>
     </h1>
 
     {{ include('nation/form/edit.html.twig', {'button_label': 'Update'}) }}

@@ -21,26 +21,46 @@ class PlayerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname')
-            ->add('lastname')
-            ->add('name')
+            ->add('firstname', null,  [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('lastname', null,  [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('name', null,  [
+                'attr' => ['class' => 'form-control']
+            ])
             ->add('nation', EntityType::class, [
                 'class' => Nation::class,
                 'query_builder' => function (NationRepository $nationRepository) {
                     return $nationRepository->findAllSortSelect();
                 },
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'attr' => ['class' => 'form-control']
             ])
             ->add('birthDate', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'dd-mm-yyyy',
+                'attr' => ['class' => 'form-control']
             ])
-            ->add('birthPlace')
-            ->add('height')
-            ->add('position')
-            ->add('image', FileType::class)
-            ->add('nationActive')
-            ->add('clubActive')
+            ->add('birthPlace', null,  [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('height', null,  [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('position', null,  [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('image', FileType::class,  [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('nationActive', null,  [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('clubActive', null,  [
+                'attr' => ['class' => 'form-control']
+            ])
         ;
     }
 
@@ -51,6 +71,7 @@ class PlayerType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Player::class,
+            'attr' => ['class' => 'form-app']
         ]);
     }
 }

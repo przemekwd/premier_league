@@ -3,7 +3,7 @@ h1.table-header {
   color: $color-header;
   i {
     vertical-align: sub;
-    font-size: 48px;
+    font-size: $size-material-icon-x2;
     color: $color-header;
   }
   span {
