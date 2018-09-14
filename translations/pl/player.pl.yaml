@@ -2,6 +2,7 @@ player_menu: Zawodnicy
 player_index: Lista zawodników
 player_new: Dodaj nowego zawodnika
 player_edit: 'Edycja %fullname'
+fullname: Imię i nazwisko
 firstname: Imię
 lastname: Nazwisko
 name: Pseudonim

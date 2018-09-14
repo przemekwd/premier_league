@@ -2,6 +2,7 @@ player_menu: Player
 player_index: Players list
 player_new: Add new player
 player_edit: 'Edit %fullname'
+fullname: Name
 firstname: Firstname
 lastname: Lastname
 name: Name

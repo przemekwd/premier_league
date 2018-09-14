@@ -71,13 +71,15 @@ class PlayerController extends AbstractController
      */
     public function edit(Request $request, Player $player): Response
     {
+        $fileName = $player->getImage();
         $player->setImage(
-            new File($this->getParameter('player_image_dir') . '/' . $player->getImage())
+            new File($this->getParameter('player_image_dir') . '/' . $fileName)
         );
         $form = $this->createForm(PlayerType::class, $player);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $player->setImage($fileName);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('player_edit', ['id' => $player->getId()]);
