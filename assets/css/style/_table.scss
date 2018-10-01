@@ -15,6 +15,9 @@ h1.table-header {
 }
 table {
   th, td {
+    &.empty {
+      text-align: center;
+    }
     &.table-first-col {
       width: 10%;
       text-align: center;

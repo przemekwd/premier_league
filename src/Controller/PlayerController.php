@@ -41,9 +41,10 @@ class PlayerController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $player->getImage();
-            $fileName = $fileUploader->upload($file);
-            $player->setImage($fileName);
+            if ($file = $player->getImageFile()) {
+                $fileName = $fileUploader->upload($file);
+                $player->setImage($fileName);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($player);
@@ -69,18 +70,24 @@ class PlayerController extends AbstractController
     /**
      * @Route("/{id}/edit", name="player_edit", methods="GET|POST")
      */
-    public function edit(Request $request, Player $player): Response
+    public function edit(Request $request, Player $player, FileUploader $fileUploader): Response
     {
-        $fileName = $player->getImage();
-        $player->setImage(
-            new File($this->getParameter('player_image_dir') . '/' . $fileName)
-        );
+        if ($player->getImage()) {
+            $player->setImageFile(
+                new File($this->getParameter('player_image_dir') . '/' . $player->getImage())
+            );
+        }
         $form = $this->createForm(PlayerType::class, $player);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $player->setImage($fileName);
-            $this->getDoctrine()->getManager()->flush();
+            if ($file = $player->getImageFile()) {
+                $fileName = $fileUploader->upload($file);
+                $player->setImage($fileName);
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($player);
+            $em->flush();
 
             return $this->redirectToRoute('player_edit', ['id' => $player->getId()]);
         }

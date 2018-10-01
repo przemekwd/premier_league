@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PlayerRepository")
@@ -43,12 +44,14 @@ class Player
     private $birthPlace;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\NotBlank(message="Please, upload player image")
-     * @Assert\File(mimeTypes={"image/png"})
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
+
+    /**
+     * @Assert\File(mimeTypes={"image/png"})
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -72,11 +75,15 @@ class Player
     private $height;
 
     /**
-     * @ORM\Column(type="string", length=3)
+     * @var string
+     */
+    private $fullname;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Position", inversedBy="players")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $position;
-
-    private $fullname;
 
     public function getId(): ?int
     {
@@ -203,22 +210,32 @@ class Player
         return $this;
     }
 
-    public function getPosition(): ?string
-    {
-        return $this->position;
-    }
-
-    public function setPosition(string $position): self
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
     public function getFullname()
     {
         return $this->firstname
             . ($this->name ? ' "' . $this->name . '" ' : ' ')
             . $this->lastname;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile($imageFile): void
+    {
+        $this->imageFile = $imageFile;
+    }
+
+    public function getPosition(): ?Position
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?Position $position): self
+    {
+        $this->position = $position;
+
+        return $this;
     }
 }

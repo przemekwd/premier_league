@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\Nation;
 use App\Entity\Player;
+use App\Entity\Position;
 use App\Repository\NationRepository;
+use App\Repository\PositionRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -40,7 +42,7 @@ class PlayerType extends AbstractType
             ])
             ->add('birthDate', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'dd-mm-yyyy',
+                'format' => 'dd-MM-yyyy',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('birthPlace', null,  [
@@ -49,11 +51,23 @@ class PlayerType extends AbstractType
             ->add('height', null,  [
                 'attr' => ['class' => 'form-control']
             ])
-            ->add('position', null,  [
+            ->add('position', EntityType::class, [
+                'class' => Position::class,
+                'query_builder' => function (PositionRepository $positionRepository) {
+                    return $positionRepository->findAllSortSelect();
+                },
+                'choice_label' => 'name',
                 'attr' => ['class' => 'form-control']
             ])
-            ->add('image', FileType::class,  [
-                'attr' => ['class' => 'form-control']
+            ->add('image', null,  [
+                'attr' => [
+                    'class' => 'form-control',
+                    'readonly' => 'readonly',
+                ]
+            ])
+            ->add('imageFile', FileType::class,  [
+                'attr' => ['class' => 'form-control'],
+                'required' => false,
             ])
             ->add('nationActive', null,  [
                 'attr' => ['class' => 'form-control']

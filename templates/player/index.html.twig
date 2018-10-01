@@ -16,6 +16,7 @@
                 <th class="table-first-col"></th>
                 <th class="table-first-col"></th>
                 <th>{% trans from 'player' %}fullname{% endtrans %}</th>
+                <th>{% trans from 'player' %}position{% endtrans %}</th>
                 <th>{% trans from 'player' %}birth_date{% endtrans %}</th>
                 <th>{% trans from 'player' %}birth_place{% endtrans %}</th>
                 <th>{% trans from 'player' %}nation_active{% endtrans %}</th>
@@ -35,6 +36,7 @@
                          alt="{{ player.nation.name }}" class="nation-flag">
                 </td>
                 <td>{{ player.firstname }} {% if player.name %}"{{ player.name }}"{% endif %} {{ player.lastname }}</td>
+                <td>{{ player.position.name|trans({}, 'position') }}</td>
                 <td>{{ player.birthDate ? player.birthDate|date('d-m-Y') : '' }}</td>
                 <td>{{ player.birthPlace }}</td>
                 <td>{{ player.nationActive ? 'Yes' : 'No' }}</td>
@@ -52,7 +54,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8" class="empty">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
