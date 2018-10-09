@@ -33,9 +33,15 @@ class Nation
      */
     private $players;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Manager", mappedBy="nation")
+     */
+    private $managers;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
+        $this->managers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,5 +107,36 @@ class Nation
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return Collection|Manager[]
+     */
+    public function getManagers(): Collection
+    {
+        return $this->managers;
+    }
+
+    public function addManager(Manager $manager): self
+    {
+        if (!$this->managers->contains($manager)) {
+            $this->managers[] = $manager;
+            $manager->setNation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeManager(Manager $manager): self
+    {
+        if ($this->managers->contains($manager)) {
+            $this->managers->removeElement($manager);
+            // set the owning side to null (unless already changed)
+            if ($manager->getNation() === $this) {
+                $manager->setNation(null);
+            }
+        }
+
+        return $this;
     }
 }

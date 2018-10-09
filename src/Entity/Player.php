@@ -85,6 +85,11 @@ class Player
      */
     private $position;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Club", inversedBy="players")
+     */
+    private $club;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -235,6 +240,18 @@ class Player
     public function setPosition(?Position $position): self
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    public function getClub(): ?Club
+    {
+        return $this->club;
+    }
+
+    public function setClub(?Club $club): self
+    {
+        $this->club = $club;
 
         return $this;
     }
