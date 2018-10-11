@@ -1,0 +1,9 @@
+<form method="post" action="{{ path('manager_delete', {'id': manager.id}) }}" class="delete-form"
+      onsubmit="return confirm({% trans from 'base' %}confirm_delete{% endtrans %});">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ manager.id) }}">
+    <button class="btn btn-danger">
+        {{ icon('cancel_outlined', 'icon-danger') }}
+        {% trans from 'button' %}delete{% endtrans %}
+    </button>
+</form>

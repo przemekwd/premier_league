@@ -12,39 +12,11 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Club[]    findAll()
  * @method Club[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ClubRepository extends ServiceEntityRepository
+class ClubRepository extends AppRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Club::class);
+        parent::__construct($registry, Club::class, 'c');
     }
 
-//    /**
-//     * @return Club[] Returns an array of Club objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Club
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

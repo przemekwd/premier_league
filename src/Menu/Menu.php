@@ -52,6 +52,14 @@ class Menu
             'route' => 'player_index',
             'attributes' => $this->childAttribute
         ]);
+        $menu->addChild('Managers', [
+            'route' => 'manager_index',
+            'attributes' => $this->childAttribute
+        ]);
+        $menu->addChild('Clubs', [
+            'route' => 'club_index',
+            'attributes' => $this->childAttribute
+        ]);
         $this->setLinkClassToChild($menu);
 
         return $menu;

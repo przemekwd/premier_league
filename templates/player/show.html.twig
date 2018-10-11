@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Player{% endblock %}
+{% block title %}
+    {% trans from 'base' %}title{% endtrans %} | {{ player.fullname }}
+{% endblock %}
 
 {% block body %}
     <h1 class="table-header">

@@ -6,8 +6,7 @@
 
 {% block body %}
     <h1 class="table-header">
-        <i class="material-icons">view_list</i>
-        {% trans from 'player'%}player_index{% endtrans %}
+        {{ icon('view_list') }} {% trans from 'player' %}player_index{% endtrans %}
     </h1>
 
     <table class="table table-hover table-dark">
@@ -37,31 +36,28 @@
                 </td>
                 <td>{{ player.firstname }} {% if player.name %}"{{ player.name }}"{% endif %} {{ player.lastname }}</td>
                 <td>{{ player.position.name|trans({}, 'position') }}</td>
-                <td>{{ player.birthDate ? player.birthDate|date('d-m-Y') : '' }}</td>
+                <td>{{ player.birthDate ? player.birthDate|date('d-m-Y') ~ ' (' ~ player.birthDate|years_old() ~ ')' : '' }}</td>
                 <td>{{ player.birthPlace }}</td>
                 <td>{{ player.nationActive ? 'Yes' : 'No' }}</td>
                 <td>{{ player.clubActive ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('player_show', {'id': player.id}) }}" class="btn btn-secondary">
-                        <i class="material-icons">info_outlined</i>
-                        {% trans from 'button'%}show{% endtrans %}
+                        {{ icon('info_outlined') }} {% trans from 'button' %}show{% endtrans %}
                     </a>
                     <a href="{{ path('player_edit', {'id': player.id}) }}" class="btn btn-secondary">
-                        <i class="material-icons">edit</i>
-                        {% trans from 'button'%}edit{% endtrans %}
+                        {{ icon('edit') }} {% trans from 'button'%}edit{% endtrans %}
                     </a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8" class="empty">no records found</td>
+                <td colspan="9" class="empty">{% trans from 'base' %}empty_list{% endtrans %}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
     <a href="{{ path('player_new') }}" class="btn btn-primary">
-        <i class="material-icons">add_circle_outline</i>
-        {% trans from 'button'%}add{% endtrans %}
+        {{ icon('add_circle_outline') }} {% trans from 'button'%}add{% endtrans %}
     </a>
 {% endblock %}

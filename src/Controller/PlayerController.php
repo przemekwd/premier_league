@@ -36,6 +36,7 @@ class PlayerController extends AbstractController
      */
     public function new(Request $request, FileUploader $fileUploader): Response
     {
+        $fileUploader->setTargetDirectory($this->getParameter('player_image_dir'));
         $player = new Player();
         $form = $this->createForm(PlayerType::class, $player);
         $form->handleRequest($request);
@@ -72,6 +73,7 @@ class PlayerController extends AbstractController
      */
     public function edit(Request $request, Player $player, FileUploader $fileUploader): Response
     {
+        $fileUploader->setTargetDirectory($this->getParameter('player_image_dir'));
         if ($player->getImage()) {
             $player->setImageFile(
                 new File($this->getParameter('player_image_dir') . '/' . $player->getImage())

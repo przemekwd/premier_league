@@ -6,4 +6,7 @@ img.player-avatar {
 }
 .player-image {
   text-align: center;
+  img {
+    max-width: 100%;
+  }
 }

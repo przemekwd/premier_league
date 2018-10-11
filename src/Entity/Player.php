@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
@@ -89,6 +91,16 @@ class Player
      * @ORM\ManyToOne(targetEntity="App\Entity\Club", inversedBy="players")
      */
     private $club;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ClubPlayer", mappedBy="player")
+     */
+    private $clubs;
+
+    public function __construct()
+    {
+        $this->clubs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -217,9 +229,7 @@ class Player
 
     public function getFullname()
     {
-        return $this->firstname
-            . ($this->name ? ' "' . $this->name . '" ' : ' ')
-            . $this->lastname;
+        return $this->firstname . ($this->name ? ' "' . $this->name . '" ' : ' ') . $this->lastname;
     }
 
     public function getImageFile(): ?File
@@ -252,6 +262,37 @@ class Player
     public function setClub(?Club $club): self
     {
         $this->club = $club;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ClubPlayer[]
+     */
+    public function getClubs(): Collection
+    {
+        return $this->clubs;
+    }
+
+    public function addClub(ClubPlayer $club): self
+    {
+        if (!$this->clubs->contains($club)) {
+            $this->clubs[] = $club;
+            $club->setPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClub(ClubPlayer $club): self
+    {
+        if ($this->clubs->contains($club)) {
+            $this->clubs->removeElement($club);
+            // set the owning side to null (unless already changed)
+            if ($club->getPlayer() === $this) {
+                $club->setPlayer(null);
+            }
+        }
 
         return $this;
     }

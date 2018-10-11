@@ -6,6 +6,7 @@
 parameters:
     locale: 'en'
     player_image_dir: '%kernel.project_dir%/public/img/player'
+    manager_image_dir: '%kernel.project_dir%/public/img/manager'
     temp_dir: '%kernel.project_dir%/public/temp'
 
 services:
@@ -41,6 +42,11 @@ services:
         tags:
             - { name: knp_menu.menu, alias: main }
 
+    App\Repository\AppRepository:
+        arguments:
+            $entityClass: 'Player'
+            $alias: 'p'
+
     App\Twig\AppFunction:
         tags:
             - { name: twig.extension }
@@ -52,6 +58,13 @@ services:
     App\EventListener\PlayerImageUploadListener:
         arguments:
             $targetDirectory: '%player_image_dir%'
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+
+    App\EventListener\ManagerImageUploadListener:
+        arguments:
+            $targetDirectory: '%manager_image_dir%'
         tags:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }

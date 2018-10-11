@@ -28,9 +28,21 @@ class Club
      */
     private $players;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Manager", inversedBy="club", cascade={"persist", "remove"})
+     */
+    private $manager;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ClubManager", mappedBy="club")
+     */
+    private $managers;
+
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
+        $this->managers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,4 +92,48 @@ class Club
 
         return $this;
     }
+
+    public function getManager(): ?Manager
+    {
+        return $this->manager;
+    }
+
+    public function setManager(?Manager $manager): self
+    {
+        $this->manager = $manager;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ClubManager[]
+     */
+    public function getManagers(): Collection
+    {
+        return $this->managers;
+    }
+
+    public function addManager(ClubManager $manager): self
+    {
+        if (!$this->managers->contains($manager)) {
+            $this->managers[] = $manager;
+            $manager->setClub($this);
+        }
+
+        return $this;
+    }
+
+    public function removeManager(ClubManager $manager): self
+    {
+        if ($this->managers->contains($manager)) {
+            $this->managers->removeElement($manager);
+            // set the owning side to null (unless already changed)
+            if ($manager->getClub() === $this) {
+                $manager->setClub(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

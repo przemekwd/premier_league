@@ -12,14 +12,14 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Nation[]    findAll()
  * @method Nation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class NationRepository extends ServiceEntityRepository implements AppRepositoryInterface
+class NationRepository extends AppRepository
 {
     /**
      * @param RegistryInterface $registry
      */
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Nation::class);
+        parent::__construct($registry, Nation::class, 'n');
     }
 
     /**
@@ -30,21 +30,6 @@ class NationRepository extends ServiceEntityRepository implements AppRepositoryI
     {
         return $this->createQueryBuilder('n')
             ->orderBy('n.name', $sort);
-    }
-
-    /**
-     * @param   array       $orderBy
-     * @return  Nation[]
-     */
-    public function findAllBySort(array $where = [], array $orderBy = []): array
-    {
-        $result = $this->createQueryBuilder('n');
-
-        foreach ($orderBy as $sort => $order) {
-            $result->addOrderBy("n.$sort", $order);
-        }
-
-        return $result->getQuery()->getResult();
     }
 
 }

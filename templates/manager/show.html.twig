@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% trans from 'base' %}title{% endtrans %} | {{ manager.fullname }}
+{% endblock %}
+
+{% block body %}
+    <h1 class="table-header">
+        <img src="{{ asset('/build/img/nation/' ~ manager.nation.code ~ '.png') }}" class="nation-flag"/>
+        <span>{{ manager.fullname }}</span>
+    </h1>
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-lg-4 player-image">
+            <img src="{{ asset('/img/manager/' ~ manager.image) }}" alt="{{ manager.fullname }}"/>
+        </div>
+        <div class="col-md-8 col-sm-8 col-ls-8">
+            <div class="row mb-3">
+                <div class="col-md-4 col-sm-4 col-ls-4 font-weight-bold">{% trans from 'manager' %}firstname{% endtrans %}</div>
+                <div class="col-md-8 col-sm-8 col-ls-8">{{ manager.firstname }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 col-sm-4 col-ls-4 font-weight-bold">{% trans from 'manager' %}lastname{% endtrans %}</div>
+                <div class="col-md-8 col-sm-8 col-ls-8">{{ manager.lastname }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 col-sm-4 col-ls-4 font-weight-bold">{% trans from 'manager' %}name{% endtrans %}</div>
+                <div class="col-md-8 col-sm-8 col-ls-8">{{ manager.name }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 col-sm-4 col-ls-4 font-weight-bold">{% trans from 'manager' %}birth_date{% endtrans %}</div>
+                <div class="col-md-8 col-sm-8 col-ls-8">{{ manager.birthDate ? manager.birthDate|date('Y-m-d') : '' }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 col-sm-4 col-ls-4 font-weight-bold">{% trans from 'manager' %}birth_place{% endtrans %}</div>
+                <div class="col-md-8 col-sm-8 col-ls-8">{{ manager.birthPlace }}</div>
+            </div>
+
+        </div>
+    </div>
+
+    <a href="{{ path('manager_index') }}" class="btn btn-secondary">
+        {{ icon('arrow_back_ios', 'icon-secondary') }} {% trans from 'manager' %}index{% endtrans %}
+    </a>
+    <a href="{{ path('manager_edit', {'id': manager.id}) }}" class="btn btn-warning btn-return">
+        {{ icon('edit', 'icon-warning') }} {% trans from 'button' %}edit{% endtrans %}
+    </a>
+
+    {{ include('manager/form/delete.html.twig') }}
+{% endblock %}

@@ -3,5 +3,6 @@ nation_index: Nations list
 nation_new: Add new nation
 nation_edit: 'Edit %nation'
 players_count: Players
+managers_count: Managers
 name: Name
 code: Code

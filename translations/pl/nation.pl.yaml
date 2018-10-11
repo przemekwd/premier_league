@@ -3,5 +3,6 @@ nation_index: Lista narodowości
 nation_new: Dodaj nową narodowość
 nation_edit: 'Edycja %nation'
 players_count: Liczba zawodników
+managers_count: Liczba managerów
 name: Nazwa
 code: Kod

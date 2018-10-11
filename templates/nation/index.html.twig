@@ -11,9 +11,10 @@
     <div class="row">
         {% for nation in nations %}
             <div class="col-md-2 col-sm-4 nation-block">
-                <div class="nation-name">{{ nation.name }}</div>
                 <div class="nation-image" style="background-image:
-                        url('{{ asset('/build/img/nation/' ~ nation.code ~ '.png') }}')"></div>
+                        url('{{ asset('/build/img/nation/' ~ nation.code ~ '.png') }}')">
+                    <div class="nation-name">{{ nation.name }}</div>
+                </div>
                 <div class="nation-actions">
                     <a href="{{ path('nation_show', {'id': nation.id}) }}" class="btn btn-secondary">
                         {{ icon('info_outlined') }}
@@ -24,6 +25,9 @@
                 </div>
                 <a class="nation-players" href="{{ path('player_index', {'nation': nation.id}) }}">
                     {% trans from 'nation' %}players_count{% endtrans %}: {{ nation.players|length }}
+                </a>
+                <a class="nation-players" href="{{ path('manager_index', {'nation': nation.id}) }}">
+                    {% trans from 'nation' %}managers_count{% endtrans %}: {{ nation.managers|length }}
                 </a>
             </div>
         {% else %}

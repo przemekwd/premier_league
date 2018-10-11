@@ -8,17 +8,17 @@
 namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
-use Twig_Function;
+use Twig\TwigFunction;
 
 class AppFunction extends AbstractExtension
 {
     /**
-     * @return array|\Twig_Filter[]
+     * @return array|\Twig_Function[]
      */
     public function getFunctions()
     {
         return [
-            new Twig_Function('icon', [$this, 'materialIcon'], ['is_safe' => ['html']]),
+            new TwigFunction('icon', [$this, 'materialIcon'], ['is_safe' => ['html']]),
         ];
     }
 

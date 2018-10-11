@@ -1,0 +1,10 @@
+menu: Manager
+index: Managers list
+new: Add new manager
+edit: 'Edit %fullname'
+fullname: Name
+firstname: Firstname
+lastname: Lastname
+name: Name
+birth_date: Birth date
+birth_place: Birth place
